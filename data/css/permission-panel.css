@@ -1,0 +1,72 @@
+
+html {
+	overflow: hidden;
+}
+
+body {
+	font: message-box;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.alert {
+	margin: 10px;
+	padding: 7px 15px;
+	overflow: hidden;
+}
+
+.alert .btn {
+	float: right;
+	font-size: inherit;
+	padding: 2px 8px;
+	margin-left: 2px;
+	margin-top: 2px;
+}
+
+.site-panel {
+	border-left: none;
+	border-right: none;
+	border-radius: 0;
+	margin-bottom: 10px;
+}
+
+.site-panel .panel-heading {
+	padding: 5px 7px;
+}
+
+.site-panel .panel-body {
+	padding: 7px;
+	padding-left: 15px;
+	word-wrap: break-word;
+}
+
+.permission-group {
+	margin: 10px;
+}
+
+.permission-group .list-group-item {
+	padding: 5px 7px;
+	padding-left: calc(7px + 16px + 7px);
+	background-repeat: no-repeat;
+	background-position: 7px center;
+}
+
+.permission-group .icon-allow {
+	background-image: url(../img/allow.svg);
+}
+
+.permission-group .icon-allowSession {
+	background-image: url(../img/allow-session.svg);
+}
+
+.permission-group .icon-allowTemp {
+	background-image: url(../img/allow-temp.svg);
+}
+
+.permission-group .icon-block {
+	background-image: url(../img/block.svg);
+}
+
+.permission-group .active {
+	background-image: none;
+}

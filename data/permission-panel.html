@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>permission-panel.html</title>
+
+  <link href="third-party/css/bootstrap.css" rel="stylesheet">
+  <link href="css/permission-panel.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="alerts"></div>
+
+<div class="panel panel-default site-panel">
+  <div class="panel-heading" data-l10n-id="site_panel_label">site_panel_label</div>
+  <div class="panel-body" id="site-name">#site-name</div>
+</div>
+
+<div class="list-group permission-group">
+  <button type="button" class="list-group-item icon-allow"
+      id="permission-allow"
+      data-l10n-id="permission_allow_label">
+    permission_allow_label
+  </button>
+
+  <button type="button" class="list-group-item icon-allowSession"
+      id="permission-allowSession"
+      data-l10n-id="permission_allowSession_label">
+    permission_allowSession_label
+  </button>
+
+  <button type="button" class="list-group-item icon-allowTemp"
+      id="permission-allowTemp"
+      data-l10n-id="permission_allowTemp_label">
+    permission_allowTemp_label
+  </button>
+
+  <button type="button" class="list-group-item icon-block"
+      id="permission-block"
+      data-l10n-id="permission_block_label">
+    permission_block_label
+  </button>
+</div>
+
+<div class="list-group permission-group">
+  <button type="button" class="list-group-item"
+      id="permission-default"
+      data-l10n-id="permission_default_label">
+    permission_default_label
+  </button>
+</div>
+
+<!--
+<script src="third-party/js/jquery.min.js"></script>
+<script src="third-party/js/bootstrap.js"></script>
+-->
+
+</body>
+</html>
