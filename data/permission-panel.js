@@ -46,10 +46,10 @@ function update() {
 			button.type = "button";
 			button.classList.add("btn");
 			button.classList.add("btn-default");
-			button.textContent = message.commandLabel;
+			button.textContent = message.command.label;
 			button.addEventListener("click", (event) => {
 				if (event.button === 0) {
-					self.port.emit("doCommandFinal", message.command);
+					self.port.emit(message.command.name, message.command.data);
 				}
 			}, false);
 			
@@ -82,17 +82,17 @@ function update() {
 permissionButtons.forEach(([capability, button]) => {
 	button.addEventListener("click", (event) => {
 		if (event.button === 0) {
-			self.port.emit("doCommandFinal", ["setPermission", {
+			self.port.emit("setPermission", {
 				origins: siteData.origins,
 				capability: capability,
-			}]);
+			});
 		}
 	}, false);
 });
 
 self.port.on("siteData", (data) => {
 	siteData = data;
-	update();
 	
-	self.port.emit("doCommand", ["setPanelHeight", document.documentElement.offsetHeight]);
+	update();
+	self.port.emit("setPanelHeight", document.documentElement.offsetHeight);
 });
