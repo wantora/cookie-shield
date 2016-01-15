@@ -2,7 +2,7 @@
   "title": "CookieShield",
   "name": "cookie-shield",
   "id": "cookie-shield@wantora.github.io",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "CookieShield provides a button for manage cookie permission.",
   "main": "index.js",
   "author": "wantora",
