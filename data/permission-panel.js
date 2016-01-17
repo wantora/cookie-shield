@@ -1,7 +1,7 @@
 "use strict";
 
 const alertsEle = document.getElementById("alerts");
-const siteNameEle = document.getElementById("site-name");
+const siteNamesEle = document.getElementById("site-names");
 const permissionButtons = [
 	["allow", document.getElementById("permission-allow")],
 	["allowSession", document.getElementById("permission-allowSession")],
@@ -12,27 +12,47 @@ const permissionButtons = [
 
 let siteData = null;
 
-function resetButton(button) {
-	if (button.hasAttribute("data-default-class")) {
-		button.className = button.getAttribute("data-default-class");
+function resetFormElement(ele) {
+	if (ele.hasAttribute("data-default-class")) {
+		ele.className = ele.getAttribute("data-default-class");
 	} else {
-		button.setAttribute("data-default-class", button.className);
+		ele.setAttribute("data-default-class", ele.className);
 	}
 	
-	button.disabled = false;
-	button.blur();
+	ele.disabled = false;
+	ele.blur();
 }
 
-function resetAlerts(ele) {
-	ele.textContent = "";
+function updateSiteNames() {
+	resetFormElement(siteNamesEle);
+	siteNamesEle.textContent = "";
+	
+	siteData.table.forEach((row, index) => {
+		const option = document.createElement("option");
+		
+		option.textContent = row.name;
+		option.value = String(index);
+		siteNamesEle.appendChild(option);
+	});
+	
+	siteNamesEle.value = String(siteData.selectedIndex);
+	
+	if (!siteData.enabled) {
+		siteNamesEle.classList.add("disabled");
+		siteNamesEle.disabled = true;
+	}
 }
 
-function update() {
-	siteNameEle.textContent = siteData.name;
+function selectedRow() {
+	return siteData.table[Number(siteNamesEle.value)];
+}
+
+function updateAlerts() {
+	alertsEle.textContent = "";
 	
-	resetAlerts(alertsEle);
+	const row = selectedRow();
 	
-	siteData.permission.messages.forEach((message) => {
+	row.permission.messages.forEach((message) => {
 		const alert = document.createElement("div");
 		
 		alert.classList.add("alert");
@@ -58,12 +78,16 @@ function update() {
 		
 		alertsEle.appendChild(alert);
 	});
+}
+
+function updateButtons() {
+	const row = selectedRow();
 	
 	permissionButtons.forEach(([capability, button]) => {
-		resetButton(button);
+		resetFormElement(button);
 		
 		if (capability === "default") {
-			button.classList.add("icon-" + siteData.permission.defaultCapability);
+			button.classList.add("icon-" + siteData.defaultCapability);
 		}
 		
 		if (!siteData.enabled) {
@@ -71,19 +95,35 @@ function update() {
 			button.disabled = true;
 		}
 		
-		if (capability === siteData.permission.capability &&
-			siteData.permission.capability !== "unknown") {
+		if (row.permission.capability === capability &&
+			row.permission.capability !== "unknown") {
 			button.classList.add("active");
 			button.disabled = true;
 		}
 	});
 }
 
+function updatePanelHeight() {
+	self.port.emit("setPanelHeight", document.documentElement.offsetHeight);
+}
+
+function updateRow() {
+	updateAlerts();
+	updateButtons();
+	updatePanelHeight();
+}
+
+siteNamesEle.addEventListener("change", () => {
+	updateRow();
+}, false);
+
 permissionButtons.forEach(([capability, button]) => {
 	button.addEventListener("click", (event) => {
 		if (event.button === 0) {
-			self.port.emit("setPermission", {
-				origins: siteData.origins,
+			const row = selectedRow();
+			
+			self.port.emit("addPermission", {
+				origin: row.origin,
 				capability: capability,
 			});
 		}
@@ -93,6 +133,6 @@ permissionButtons.forEach(([capability, button]) => {
 self.port.on("siteData", (data) => {
 	siteData = data;
 	
-	update();
-	self.port.emit("setPanelHeight", document.documentElement.offsetHeight);
+	updateSiteNames();
+	updateRow();
 });

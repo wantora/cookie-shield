@@ -72,7 +72,6 @@
     "comma-spacing": 2,
     "comma-style": 2,
     "computed-property-spacing": 2,
-    "consistent-this": [2, "DO NOT USE"],
     "eol-last": 2,
     "indent": [2, "tab"],
     "key-spacing": 2,

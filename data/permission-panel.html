@@ -10,11 +10,14 @@
 </head>
 <body>
 
-<div id="alerts"></div>
-
 <div class="panel panel-default site-panel">
   <div class="panel-heading" data-l10n-id="site_panel_label">site_panel_label</div>
-  <div class="panel-body" id="site-name">#site-name</div>
+  <div class="panel-body">
+    <select class="site-names-select" id="site-names">
+      <option>#site-names 1</option>
+      <option>#site-names 2</option>
+    </select>
+  </div>
 </div>
 
 <div class="list-group permission-group">
@@ -50,6 +53,8 @@
     permission_default_label
   </button>
 </div>
+
+<div id="alerts"></div>
 
 </body>
 </html>

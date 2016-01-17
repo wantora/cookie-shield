@@ -29,6 +29,24 @@
     "debug": "jpm run --debug",
     "build": "jpm xpi"
   },
+  "preferences": [
+    {
+      "name": "defaultDomainType",
+      "type": "radio",
+      "title": "Default domain type",
+      "value": "base",
+      "options": [
+        {
+          "value": "base",
+          "label": "Base domain"
+        },
+        {
+          "value": "full",
+          "label": "Full domain"
+        }
+      ]
+    }
+  ],
   "permissions": {
     "private-browsing": true
   },
