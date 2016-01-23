@@ -1,3 +1,16 @@
+This software is licensed under The MIT License.
+
+--------
+
+[Bootstrap](http://getbootstrap.com/)
+Copyright (c) Twitter, Inc.
+
+    data/third-party/css/bootstrap.css
+
+This file is licensed under the [MIT License](https://github.com/twbs/bootstrap/blob/master/LICENSE).
+
+--------
+
 The MIT License
 
 Copyright (c) 2015 wantora
